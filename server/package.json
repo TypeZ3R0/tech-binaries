@@ -1,0 +1,14 @@
+{
+    "name": "tech-binaries-v1",
+    "version": "1.0.0",
+    "description": "Tech Binaries Blog",
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon server.js"
+    },
+    "author": "Aranyak Samui",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}

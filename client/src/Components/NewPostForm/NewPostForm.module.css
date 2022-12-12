@@ -1,0 +1,31 @@
+.form {
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 3rem 15rem;
+    align-items: flex-start;
+}
+
+.input {
+    width: 100%;
+    height: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.textarea {
+    font-family: 'Readex Pro', sans-serif;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 10rem;
+    border: none;
+    
+}
+
+.createButton {
+    font-family: 'Readex Pro', sans-serif;
+    padding: 0.7rem 3rem;
+    font-size: 1.5rem;
+}

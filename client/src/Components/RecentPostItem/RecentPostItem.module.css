@@ -1,0 +1,48 @@
+.recentPostItem {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    margin-bottom: 3rem;
+}
+
+.recentPostItem:hover {
+    color: #126466;
+}
+
+.img {
+    height: 160px;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+}
+
+.postDetails {
+    margin-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.postInfo h4 {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #555555;
+}
+
+.postTitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.extraInfo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.extraInfo h4 {
+    font-size: 0.9rem;
+    color: #555555;
+    font-weight: 400;
+}
