@@ -1,5 +1,5 @@
 // Requiring project dependencies
-const express = require("express");
+import express from "express";
 
 // Initializing router with express router app
 const router = express.Router();
@@ -13,4 +13,4 @@ router.route("/new")
     })
     .post();
 
-module.exports = router;
+export default router

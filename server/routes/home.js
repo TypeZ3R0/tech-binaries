@@ -1,15 +1,14 @@
 // Requiring project dependencies
-const express = require("express");
-
-const posts = require("../sample_data/sampledata.js");
+import express from "express";
 
 // Initializing router with express router app
 const router = express.Router();
 
+// Importing controllers
+import { getHome } from "../controllers/homeController.js";
+
 // Routes
 // Home route (get method)
-router.get("/", (req, res) => {
-    res.json(posts);
-});
+router.get("/", getHome);
 
-module.exports = router;
+export default router;

@@ -1,22 +1,25 @@
 // Requiring project dependencies
-const express = require("express");
+import express from "express";
 
-// Initializing the app with express main function
+// Importing routers from routes
+import homeRouter from "./routes/home.js";
+import postsRouter from "./routes/posts.js";
+import categoryRouter from "./routes/posts.js";
+
 const app = express();
 
+// Middleware
+app.use(express.json());
 
 // Importing Routes
 // Home route
-const homeRoute = require("./routes/home.js");
-app.use("/", homeRoute);
+app.use("/", homeRouter);
 
 // Posts route
-const postsRoute = require("./routes/posts.js");
-app.use("/posts", postsRoute);
+app.use("/posts", postsRouter);
 
 // Category route
-const categoryRoute = require("./routes/category.js");
-app.use("/category", categoryRoute);
+app.use("/category", categoryRouter);
 
 // Listen to dev or production server
 const PORT = process.env.PORT || 8000;
