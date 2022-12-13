@@ -11,15 +11,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-// Importing Routes
-// Home route
-app.use("/", homeRouter);
-
-// Posts route
-app.use("/posts", postsRouter);
-
-// Category route
-app.use("/category", categoryRouter);
+app.use("/", homeRouter); // Home route
+app.use("/posts", postsRouter); // Posts route
+app.use("/category", categoryRouter); // Category route
 
 // Listen to dev or production server
 const PORT = process.env.PORT || 8000;
