@@ -23,6 +23,8 @@ model User {
 
 model Author {
     id          Int    @id @default(autoincrement())
+    authorName  String @db.VarChar(255)
+    bio         String @db.VarChar(1024)
     user        User   @relation(fields: [userEmail], references: [email])
     userEmail   String @unique
     authorPosts Post[]
