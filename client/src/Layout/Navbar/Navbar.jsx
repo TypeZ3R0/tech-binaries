@@ -54,11 +54,11 @@ const Navbar = () => {
 
                 {/* Nav buttons */}
                 <div className={classes.navbuttons}>
-                    <button>Dark</button>
+                    <button>LOGIN</button>
                     <button onClick={handleSearchClick}>
                         <img src={search_icon} className={classes.searchIcon} alt="Search" />
                     </button>
-                    <button>SUBSCRIBE</button>
+                    <button>REGISTER</button>
                 </div>
             </div>
         </nav>
