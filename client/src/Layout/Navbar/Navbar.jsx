@@ -6,23 +6,46 @@ import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import search_icon from "../../images/search_icon.svg";
 import SearchModal from "../../Components/SearchModal/SearchModal";
+import RegisterModal from "../../Components/AuthenticationModal/RegisterModal";
+import LoginModal from "../../Components/AuthenticationModal/LoginModal";
 
 // The Navbar component
 const Navbar = () => {
-
-    const [showModal, setShowModal] = useState(false);
-
-    const handleSearchClick = () => {
-        setShowModal(true);
-    }
-
-    const handleCloseSearchClick = () => {
-        setShowModal(false);
-    }
+    const [showSearchModal, setShowSearchModal] = useState(false);
+    const [showRegisterModal, setShowRegisterModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     return (
         <nav className={classes.navbar}>
-            {showModal && <SearchModal closeClick={handleCloseSearchClick} />}
+            {showSearchModal && (
+                <SearchModal
+                    closeClick={() => {
+                        setShowSearchModal(false);
+                    }}
+                />
+            )}
+            {showRegisterModal && (
+                <RegisterModal
+                    closeClick={() => {
+                        setShowRegisterModal(false);
+                    }}
+                    openLogin={() => {
+                        setShowLoginModal(true);
+                        setShowRegisterModal(false);
+                    }}
+                />
+            )}
+            {showLoginModal && (
+                <LoginModal
+                    closeClick={() => {
+                        setShowLoginModal(false);
+                    }}
+                    openRegister={() => {
+                        setShowRegisterModal(true)
+                        setShowLoginModal(false);
+                    }}
+                />
+            )}
             <div className={classes.navItems}>
                 {/* Main title */}
                 <Link to={"/"} style={{ textDecoration: "none" }}>
@@ -30,6 +53,7 @@ const Navbar = () => {
                         TECH
                         <br />
                         BINARIES
+                        <div style={{ width: "60%", height: "1px", backgroundColor: "#2c3531", marginTop: "0.5rem" }} />
                     </h1>
                 </Link>
 
@@ -54,11 +78,27 @@ const Navbar = () => {
 
                 {/* Nav buttons */}
                 <div className={classes.navbuttons}>
-                    <button>Dark</button>
-                    <button onClick={handleSearchClick}>
+                    <button
+                        onClick={() => {
+                            setShowLoginModal(true);
+                        }}
+                    >
+                        LOGIN
+                    </button>
+                    <button
+                        onClick={() => {
+                            setShowSearchModal(true);
+                        }}
+                    >
                         <img src={search_icon} className={classes.searchIcon} alt="Search" />
                     </button>
-                    <button>SUBSCRIBE</button>
+                    <button
+                        onClick={() => {
+                            setShowRegisterModal(true);
+                        }}
+                    >
+                        REGISTER
+                    </button>
                 </div>
             </div>
         </nav>
