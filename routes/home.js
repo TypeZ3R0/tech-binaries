@@ -5,7 +5,7 @@ import express from "express";
 const router = express.Router();
 
 // Importing controllers
-import { getHome } from "../controllers/homeController.js";
+import { getHome } from "../controllers/home_controller.js";
 
 // Routes
 // Home route (get method)

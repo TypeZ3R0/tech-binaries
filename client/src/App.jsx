@@ -13,6 +13,9 @@ import AdminPanel from "./Pages/AdminPanel/AdminPanel";
 import NewPost from "./Pages/NewPostPage/NewPost";
 import posts from "./blog_posts";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 // App function (renders the entire layout - starting point)
 function App() {
     return (

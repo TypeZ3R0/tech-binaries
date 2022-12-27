@@ -7,6 +7,7 @@ export const getHome = async (req, res) => {
         select: {
             title: true,
             description: true,
+            category: true,
             updatedAt: true,
             author: true,
         }
