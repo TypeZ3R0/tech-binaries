@@ -11,19 +11,20 @@ datasource db {
 }
 
 model User {
-    id            Int     @id @default(autoincrement())
-    first_name    String  @db.VarChar(128)
-    last_name     String  @db.VarChar(128)
-    email         String  @unique @db.VarChar(128)
-    password      String  @db.VarChar(1024)
-    isVerified    Boolean @default(false)
-    isAdmin       Boolean @default(false)
-    isAuthor      Boolean @default(false)
+    id            String        @id @unique @default(uuid())
+    first_name    String        @db.VarChar(128)
+    last_name     String        @db.VarChar(128)
+    email         String        @unique @db.VarChar(128)
+    password      String        @db.VarChar(1024)
+    isVerified    Boolean       @default(false)
+    isAdmin       Boolean       @default(false)
+    isAuthor      Boolean       @default(false)
     authorProfile Author?
+    refreshToken  RefreshToken?
 }
 
 model Author {
-    id          Int    @id @default(autoincrement())
+    id          String @id @unique @default(uuid())
     authorName  String @db.VarChar(255)
     bio         String @db.VarChar(1024)
     user        User   @relation(fields: [userEmail], references: [email])
@@ -32,12 +33,21 @@ model Author {
 }
 
 model Post {
-    id          Int      @id @default(autoincrement())
+    id          String   @id @unique @default(uuid())
     title       String   @db.VarChar(512)
-    description String
+    description String   @db.VarChar(2000)
     category    String   @db.VarChar(128)
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
     author      Author   @relation(fields: [authorId], references: [id])
-    authorId    Int
+    authorId    String
+}
+
+model RefreshToken {
+    id        String   @id @unique @default(uuid())
+    token     String   @db.VarChar(512)
+    user      User     @relation(fields: [userEmail], references: [email])
+    userEmail String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
 }

@@ -1,19 +1,37 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 import classes from "./LoginModal.module.css";
 import close_icon_black from "../../images/close_icon_black.svg";
 
+import baseURL from "../../backend.js";
+import { setCookie } from "../../services/cookie";
+console.log(baseURL);
+
 const LoginModal = (props) => {
+
+    const [msg, setMsg] = useState("");
+
     const emailRef = useRef();
     const passwordRef = useRef();
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         // Create login object with provided credentials
         const loginUser = { email, password };
+
+        try {
+            const { data } = await axios.post(`${baseURL}users/login`, loginUser);
+            setCookie("refreshToken", data.refreshToken);
+            setCookie("accessToken", data.accessToken);
+            window.location.reload();
+        } catch(err) {
+            console.log(err);
+            setMsg(err.response.data.message);
+        }
     };
 
     return (
@@ -25,9 +43,10 @@ const LoginModal = (props) => {
                 </button>
                 <h1>Welcome back!</h1>
                 <p>How's your day going today?</p>
+                {msg && <h4>{msg}</h4>}
                 <form className={classes.loginForm} onSubmit={handleLoginSubmit}>
-                    <input type={"email"} placeholder="Email" required />
-                    <input type={"password"} placeholder="Password" required />
+                    <input type={"email"} placeholder="Email" required ref={emailRef} />
+                    <input type={"password"} placeholder="Password" required ref={passwordRef} />
                     <button type={"submit"}>LOGIN</button>
                 </form>
                 <div style={{ width: "60%", height: "0.8px", backgroundColor: "#000" }} />
@@ -45,6 +64,7 @@ const LoginModal = (props) => {
             </div>
         </div>
     );
+
 };
 
 export default LoginModal;

@@ -1,8 +1,8 @@
 // Requiring project dependencies
+dotenv.config();
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
 
 // Importing routers from routes
 import homeRouter from "./routes/home.js";

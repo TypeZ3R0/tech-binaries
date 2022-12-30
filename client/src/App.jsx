@@ -11,10 +11,8 @@ import Feed from "./Pages/Feed/Feed.jsx";
 import PostPage from "./Pages/PostPage/PostPage.jsx";
 import AdminPanel from "./Pages/AdminPanel/AdminPanel";
 import NewPost from "./Pages/NewPostPage/NewPost";
+import UserProfile from "./Pages/Profile/UserProfile.jsx";
 import posts from "./blog_posts";
-
-import dotenv from "dotenv";
-dotenv.config();
 
 // App function (renders the entire layout - starting point)
 function App() {
@@ -44,7 +42,8 @@ function App() {
                         );
                     })}
                     <Route path="admin/" element={<AdminPanel />} />
-                    <Route path="admin/new-post/" element={<NewPost />} />
+                    <Route path="users/profile" element={<UserProfile />} />
+                    <Route path="users/authors/create-post" element={<NewPost />} />
                 </Routes>
             </Main>
             {/* Footer (row 2 column 1-2) */}

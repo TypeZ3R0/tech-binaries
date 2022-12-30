@@ -1,5 +1,5 @@
 // Third party imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Local imports
@@ -8,12 +8,54 @@ import search_icon from "../../images/search_icon.svg";
 import SearchModal from "../../Components/SearchModal/SearchModal";
 import RegisterModal from "../../Components/AuthenticationModal/RegisterModal";
 import LoginModal from "../../Components/AuthenticationModal/LoginModal";
+import { axiosJWT } from "../../services/axios.js";
+import baseURL from "../../backend.js";
+import { getCookie, removeCookie } from "../../services/cookie.js";
 
 // The Navbar component
 const Navbar = () => {
     const [showSearchModal, setShowSearchModal] = useState(false);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
+    const [foundUser, setFoundUser] = useState();
+
+    useEffect(() => {
+        const getNavProfile = async () => {
+            const accessToken = getCookie("accessToken");
+            try {
+                const { data } = await axiosJWT.get(`${baseURL}users/nav-profile`, {
+                    headers: { authorization: `Bearer ${accessToken}` },
+                });
+                setFoundUser(data.userId);
+            } catch (err) {
+                console.log(err);
+                if (err) {
+                    console.log("Please login");
+                }
+            }
+        };
+        getNavProfile();
+    }, [axiosJWT]);
+
+    const handleLogout = async () => {
+        const accessToken = getCookie("accessToken");
+        const refreshToken = getCookie("refreshToken");
+        try {
+            const { data } = await axiosJWT.post(
+                `${baseURL}users/logout`,
+                { token: refreshToken },
+                { headers: { authorization: `Bearer ${accessToken}` } }
+            );
+            if (data.successfullyLoggedOut) {
+                removeCookie("accessToken");
+                removeCookie("refreshToken");
+                setFoundUser();
+                window.location.reload();
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <nav className={classes.navbar}>
@@ -41,7 +83,7 @@ const Navbar = () => {
                         setShowLoginModal(false);
                     }}
                     openRegister={() => {
-                        setShowRegisterModal(true)
+                        setShowRegisterModal(true);
                         setShowLoginModal(false);
                     }}
                 />
@@ -78,13 +120,17 @@ const Navbar = () => {
 
                 {/* Nav buttons */}
                 <div className={classes.navbuttons}>
-                    <button
-                        onClick={() => {
-                            setShowLoginModal(true);
-                        }}
-                    >
-                        LOGIN
-                    </button>
+                    {foundUser ? (
+                        <button onClick={handleLogout}>LOGOUT</button>
+                    ) : (
+                        <button
+                            onClick={() => {
+                                setShowLoginModal(true);
+                            }}
+                        >
+                            LOGIN
+                        </button>
+                    )}
                     <button
                         onClick={() => {
                             setShowSearchModal(true);
@@ -92,13 +138,19 @@ const Navbar = () => {
                     >
                         <img src={search_icon} className={classes.searchIcon} alt="Search" />
                     </button>
-                    <button
-                        onClick={() => {
-                            setShowRegisterModal(true);
-                        }}
-                    >
-                        REGISTER
-                    </button>
+                    {foundUser ? (
+                        <Link to={"users/profile"} style={{ textDecoration: "none", color: "#fff" }} className={classes.profileButton}>
+                            PROFILE
+                        </Link>
+                    ) : (
+                        <button
+                            onClick={() => {
+                                setShowRegisterModal(true);
+                            }}
+                        >
+                            REGISTER
+                        </button>
+                    )}
                 </div>
             </div>
         </nav>

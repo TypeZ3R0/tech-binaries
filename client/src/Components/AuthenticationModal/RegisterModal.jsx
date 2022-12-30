@@ -4,8 +4,7 @@ import axios from "axios";
 
 import classes from "./RegisterModal.module.css";
 import close_icon_black from "../../images/close_icon_black.svg";
-
-const baseURL = process.env.REACT_APP_BASE_URL;
+import baseURL from "../../backend.js";
 
 const RegisterModal = (props) => {
 

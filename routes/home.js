@@ -1,6 +1,8 @@
 // Requiring project dependencies
 import express from "express";
 
+import isAuthenticated from "../middleware/auth.js";
+
 // Initializing router with express router app
 const router = express.Router();
 
