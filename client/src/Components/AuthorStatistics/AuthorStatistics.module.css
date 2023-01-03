@@ -1,0 +1,39 @@
+.mainDiv {
+    grid-column: 1/2;
+}
+
+.authorName {
+    font-size: 3rem;
+    font-weight: 500;
+    background-color: #f5f5f5;
+    padding: 1rem;
+}
+
+.authorBio {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background-color: #f5f5f5;
+    padding: 1rem;
+}
+
+.postCount {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 1rem;
+    background-color: #126466;
+}
+
+.createPostLink {
+    margin-top: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+    background-color: #3cb8ba;
+    padding: 1.8rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

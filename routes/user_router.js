@@ -8,9 +8,9 @@ import {
     tokenRefresh,
     userNavProfile,
     userLogout,
-    userProfile
+    userProfile,
 } from "../controllers/user_controller.js";
-import { authorCreatePost } from "../controllers/author_controller.js";
+import { getAuthorById, authorProfile, authorCreatePost } from "../controllers/author_controller.js";
 import isAuthenticated from "../middleware/auth.js";
 import isAuthor from "../middleware/author.js";
 
@@ -22,8 +22,11 @@ router.get("/verify/:userString", userVerifyEmail);
 router.post("/login", userLogin);
 router.post("/token-refresh", tokenRefresh);
 router.get("/nav-profile", isAuthenticated, userNavProfile);
-router.get("/profile", isAuthenticated, userProfile)
-router.get("/authors/create-post", isAuthenticated, isAuthor, authorCreatePost)
+router.get("/profile", isAuthenticated, userProfile);
+router.get("/authors/create-post", isAuthenticated, isAuthor, getAuthorById);
+router.get("/authors/nav-author", isAuthenticated, isAuthor, getAuthorById);
+router.get("/authors/author-dashboard", isAuthenticated, isAuthor, authorProfile);
+router.post("/authors/create-post", isAuthenticated, isAuthor, authorCreatePost);
 router.post("/logout", isAuthenticated, userLogout);
 
 export default router;

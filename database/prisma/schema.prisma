@@ -2,52 +2,53 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-    id            String        @id @unique @default(uuid())
-    first_name    String        @db.VarChar(128)
-    last_name     String        @db.VarChar(128)
-    email         String        @unique @db.VarChar(128)
-    password      String        @db.VarChar(1024)
-    isVerified    Boolean       @default(false)
-    isAdmin       Boolean       @default(false)
-    isAuthor      Boolean       @default(false)
-    authorProfile Author?
-    refreshToken  RefreshToken?
+  id            String        @id @unique @default(uuid())
+  first_name    String        @db.VarChar(128)
+  last_name     String        @db.VarChar(128)
+  email         String        @unique @db.VarChar(128)
+  password      String        @db.VarChar(1024)
+  isVerified    Boolean       @default(false)
+  isAdmin       Boolean       @default(false)
+  isAuthor      Boolean       @default(false)
+  authorProfile Author?
+  refreshToken  RefreshToken?
 }
 
 model Author {
-    id          String @id @unique @default(uuid())
-    authorName  String @db.VarChar(255)
-    bio         String @db.VarChar(1024)
-    user        User   @relation(fields: [userEmail], references: [email])
-    userEmail   String @unique
-    authorPosts Post[]
+  id          String @id @unique @default(uuid())
+  authorName  String @db.VarChar(255)
+  bio         String @db.VarChar(1024)
+  user        User   @relation(fields: [userEmail], references: [email])
+  userEmail   String @unique
+  authorPosts Post[]
 }
 
 model Post {
-    id          String   @id @unique @default(uuid())
-    title       String   @db.VarChar(512)
-    description String   @db.VarChar(2000)
-    category    String   @db.VarChar(128)
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    author      Author   @relation(fields: [authorId], references: [id])
-    authorId    String
+  id          String   @id @unique @default(uuid())
+  title       String   @db.VarChar(512)
+  image       String   @db.VarChar(128)
+  description String   @db.VarChar(2000)
+  category    String   @db.VarChar(128)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  author      Author   @relation(fields: [authorId], references: [id])
+  authorId    String
 }
 
 model RefreshToken {
-    id        String   @id @unique @default(uuid())
-    token     String   @db.VarChar(512)
-    user      User     @relation(fields: [userEmail], references: [email])
-    userEmail String   @unique
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @unique @default(uuid())
+  token     String   @db.VarChar(512)
+  user      User     @relation(fields: [userEmail], references: [email])
+  userEmail String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

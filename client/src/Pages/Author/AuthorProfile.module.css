@@ -1,0 +1,15 @@
+.title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3135;
+}
+
+.authorDashboard {
+    margin-top: 3rem;
+    display: grid;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}

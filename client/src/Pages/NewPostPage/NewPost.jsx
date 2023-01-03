@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import NewPostForm from "../../Components/NewPostForm/NewPostForm";
-
-import posts from "../../blog_posts";
 import { axiosJWT } from "../../services/axios.js";
 import baseURL from "../../backend.js";
 import { getCookie } from "../../services/cookie";
@@ -30,16 +28,25 @@ const NewPost = () => {
     }, [axiosJWT]);
 
     // Function which adds the post to Posts Collection
-    const handleAddPost = (blogPost) => {
-        posts.push(blogPost);
-        navigate("/", { replace: true });
+    const handleAddPost = async (blogPost) => {
+        const accessToken = getCookie("accessToken");
+        try {
+            const { data } = await axiosJWT.post(`${baseURL}users/authors/create-post`, blogPost, {
+                headers: { authorization: `Bearer ${accessToken}` },
+            });
+            if (data) {
+                navigate("/", { replace: true });
+            }
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
         <div>
             {isAuthor ? (
                 <div>
-                    <h1 style={{ fontSize: "2rem" }}>Create a new post</h1>
+                    <h1 style={{ fontSize: "2rem" }}>CREATE A NEW POST</h1>
                     {/* New post form which gives the post object on form submission */}
                     <NewPostForm onAddPost={handleAddPost} />
                 </div>

@@ -27,7 +27,6 @@ const getTokensFromRefreshToken = async () => {
     const refreshToken = getCookie("refreshToken");
     try {
         const response = await axios.post(`${baseURL}users/token-refresh`, { token: refreshToken });
-        console.log(response);
         setCookie("accessToken", response.data.accessToken);
         setCookie("refreshToken", response.data.refreshToken);
         return response.data.accessToken;

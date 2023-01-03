@@ -9,7 +9,7 @@ const isAuthor = async (req, res, next) => {
         req.user = user;
         next();
     } else {
-        res.send(403).send("Unauthorized");
+        res.status(403).send("Unauthorized");
     }
 };
 

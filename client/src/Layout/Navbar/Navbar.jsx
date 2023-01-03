@@ -18,8 +18,24 @@ const Navbar = () => {
     const [showRegisterModal, setShowRegisterModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
     const [foundUser, setFoundUser] = useState();
+    const [authorId, setAuthorId] = useState();
 
     useEffect(() => {
+        const getAuthorId = async () => {
+            const accessToken = getCookie("accessToken");
+            try {
+                const { data } = await axiosJWT.get(`${baseURL}users/authors/nav-author`, {
+                    headers: { authorization: `Bearer ${accessToken}` },
+                });
+                setAuthorId(data.authorId);
+            } catch (err) {
+                console.log(err);
+                if (err) {
+                    setAuthorId();
+                }
+            }
+        };
+        getAuthorId();
         const getNavProfile = async () => {
             const accessToken = getCookie("accessToken");
             try {
@@ -116,9 +132,17 @@ const Navbar = () => {
                     <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/pcs-and-laptops"}>
                         <li>PCs And Laptops</li>
                     </Link>
+                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"more"}>
+                        <li>More</li>
+                    </Link>
                 </ul>
 
                 {/* Nav buttons */}
+                {authorId ? (
+                    <Link to={`users/authors/author-dashboard`} className={classes.dashboardButton}>
+                        DASHBOARD
+                    </Link>
+                ) : null}
                 <div className={classes.navbuttons}>
                     {foundUser ? (
                         <button onClick={handleLogout}>LOGOUT</button>
@@ -139,7 +163,7 @@ const Navbar = () => {
                         <img src={search_icon} className={classes.searchIcon} alt="Search" />
                     </button>
                     {foundUser ? (
-                        <Link to={"users/profile"} style={{ textDecoration: "none", color: "#fff" }} className={classes.profileButton}>
+                        <Link to={"users/profile"} className={classes.profileButton}>
                             PROFILE
                         </Link>
                     ) : (

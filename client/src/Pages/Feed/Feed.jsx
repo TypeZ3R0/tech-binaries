@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import classes from "./Feed.module.css";
 import RecentPostItem from "../../Components/RecentPostItem/RecentPostItem";
-import posts from "../../blog_posts.js";
+// import posts from "../../blog_posts.js";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import baseURL from "../../backend.js";
 
 const Feed = () => {
+    const [feedPosts, setFeedPosts] = useState([]);
+
+    useEffect(() => {
+        const getFeedPosts = async () => {
+            try {
+                const { data } = await axios.get(`${baseURL}`);
+                setFeedPosts(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getFeedPosts();
+    }, []);
+
     return (
         <div className={classes.feed}>
             <div className={classes.popular}></div>
@@ -14,23 +30,24 @@ const Feed = () => {
             </div>
             <div className={classes.recent}>
                 <h1>RECENT POSTS</h1>
-                {posts.slice(0).reverse().map((post) => {
-                    return (
-                        <Link style={{textDecoration: "none", color: "black"}} to={`posts/${post.id}`}>
-                            <RecentPostItem
-                                key={post.id}
-                                imgUrl={post.imgUrl}
-                                title={post.title}
-                                author={post.author}
-                                category={post.category}
-                            />
-                        </Link>
-                    );
-                })}
+                {feedPosts
+                    ? feedPosts.map((feedPost) => {
+                          return (
+                              <Link style={{ textDecoration: "none", color: "black" }} to={`posts/${feedPost.id}`}>
+                                  <RecentPostItem
+                                      key={feedPost.id}
+                                      imgUrl={feedPost.image}
+                                      title={feedPost.title}
+                                      author={feedPost.author.authorName}
+                                      category={feedPost.category}
+                                  />
+                              </Link>
+                          );
+                      })
+                    : <h1>No posts</h1>}
             </div>
             <div></div>
         </div>
     );
 };
-
 export default Feed;

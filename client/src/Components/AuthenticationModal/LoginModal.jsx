@@ -7,7 +7,6 @@ import close_icon_black from "../../images/close_icon_black.svg";
 
 import baseURL from "../../backend.js";
 import { setCookie } from "../../services/cookie";
-console.log(baseURL);
 
 const LoginModal = (props) => {
 

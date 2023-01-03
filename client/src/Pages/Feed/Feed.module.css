@@ -24,7 +24,7 @@
 
 .recent {
     grid-column: 1/2;
-    height: 1500px;
+    height: auto;
 }
 
 .recent h1 {
