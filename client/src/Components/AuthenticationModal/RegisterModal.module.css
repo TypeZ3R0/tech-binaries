@@ -72,11 +72,11 @@
     justify-content: space-between;
 }
 
-.name input {
+.name .registerInput {
     width: 48%;
 }
 
-input {
+.registerInput {
     font-family: 'Readex Pro', sans-serif;
     padding: 0rem 1rem;
     height: 3.5rem;

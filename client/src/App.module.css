@@ -2,3 +2,9 @@
     display: grid;
     grid-template-columns: 1fr 6fr;
 }
+
+@media screen and (max-width: 1024px) {
+    nav {
+        width: 100%;
+    }
+}

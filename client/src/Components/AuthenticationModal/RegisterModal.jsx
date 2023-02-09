@@ -7,7 +7,6 @@ import close_icon_black from "../../images/close_icon_black.svg";
 import baseURL from "../../backend.js";
 
 const RegisterModal = (props) => {
-
     const [msg, setMsg] = useState("");
 
     const firstNameRef = useRef();
@@ -21,13 +20,13 @@ const RegisterModal = (props) => {
         const lastName = lastNameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-    
+
         const user = {
             first_name: firstName,
             last_name: lastName,
             email: email,
-            password: password    
-        }
+            password: password,
+        };
         try {
             const { data } = await axios.post(`${baseURL}users/register`, user);
             setMsg(data.message);
@@ -36,7 +35,7 @@ const RegisterModal = (props) => {
             console.log(error);
             setMsg(error.response.data.message);
         }
-    }
+    };
 
     return (
         <div className={classes.registerModal}>
@@ -49,14 +48,38 @@ const RegisterModal = (props) => {
                 <p>
                     Become a <span>TECH BINARIES</span> reader today
                 </p>
-                { msg.length > 0 && <h4>{ msg }</h4>}
+                {msg.length > 0 && <h4>{msg}</h4>}
                 <form className={classes.registerForm} onSubmit={handleRegisterSubmit}>
                     <div className={classes.name}>
-                        <input type={"text"} placeholder="First name" ref={firstNameRef} required />
-                        <input type={"text"} placeholder="Last name" ref={lastNameRef} required />
+                        <input
+                            type={"text"}
+                            placeholder="First name"
+                            ref={firstNameRef}
+                            required
+                            className={classes.registerInput}
+                        />
+                        <input
+                            type={"text"}
+                            placeholder="Last name"
+                            ref={lastNameRef}
+                            required
+                            className={classes.registerInput}
+                        />
                     </div>
-                    <input type={"email"} placeholder="Email" ref={emailRef} required />
-                    <input type={"password"} placeholder="Password" ref={passwordRef} required />
+                    <input
+                        type={"email"}
+                        placeholder="Email"
+                        ref={emailRef}
+                        required
+                        className={classes.registerInput}
+                    />
+                    <input
+                        type={"password"}
+                        placeholder="Password"
+                        ref={passwordRef}
+                        required
+                        className={classes.registerInput}
+                    />
                     <button type={"submit"}>REGISTER</button>
                 </form>
                 <div style={{ width: "60%", height: "0.8px", backgroundColor: "#000" }} />
@@ -66,9 +89,6 @@ const RegisterModal = (props) => {
                         <span className={classes.loginComponent} onClick={props.openLogin}>
                             Login
                         </span>
-                    </span>
-                    <span>
-                        <Link style={{ textDecoration: "none", color: "#126466" }}>Forgot Password?</Link>
                     </span>
                 </div>
             </div>

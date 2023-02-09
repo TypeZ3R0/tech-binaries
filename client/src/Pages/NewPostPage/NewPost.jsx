@@ -1,40 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import NewPostForm from "../../Components/NewPostForm/NewPostForm";
 import { axiosJWT } from "../../services/axios.js";
 import baseURL from "../../backend.js";
-import { getCookie } from "../../services/cookie";
+import { UserContext } from "../../Contexts/UserContext";
+import { PostsContext } from "../../Contexts/PostContext";
 
 // New post component
 const NewPost = () => {
-    const [isAuthor, setIsAuthor] = useState();
+
+    const { user } = useContext(UserContext);
+    const { dispatch } = useContext(PostsContext);
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const getAuthor = async () => {
-            const accessToken = getCookie("accessToken");
-            try {
-                const { data } = await axiosJWT.get(`${baseURL}users/authors/create-post`, {
-                    headers: { authorization: `Bearer ${accessToken}` },
-                });
-                setIsAuthor(data.authorId);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getAuthor();
-    }, [axiosJWT]);
-
-    // Function which adds the post to Posts Collection
+    // Function which adds the post to Posts array
     const handleAddPost = async (blogPost) => {
-        const accessToken = getCookie("accessToken");
         try {
-            const { data } = await axiosJWT.post(`${baseURL}users/authors/create-post`, blogPost, {
-                headers: { authorization: `Bearer ${accessToken}` },
-            });
-            if (data) {
+            const { data } = await axiosJWT.post(`${baseURL}users/authors/create-post`, blogPost);
+            if (data.success) {
+                dispatch({ type: "POST_ADDED", payload: data.postId })
                 navigate("/", { replace: true });
             }
         } catch (err) {
@@ -44,7 +30,7 @@ const NewPost = () => {
 
     return (
         <div>
-            {isAuthor ? (
+            {user && user.authorProfile ? (
                 <div>
                     <h1 style={{ fontSize: "2rem" }}>CREATE A NEW POST</h1>
                     {/* New post form which gives the post object on form submission */}

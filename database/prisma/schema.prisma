@@ -2,53 +2,72 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-  id            String        @id @unique @default(uuid())
-  first_name    String        @db.VarChar(128)
-  last_name     String        @db.VarChar(128)
-  email         String        @unique @db.VarChar(128)
-  password      String        @db.VarChar(1024)
-  isVerified    Boolean       @default(false)
-  isAdmin       Boolean       @default(false)
-  isAuthor      Boolean       @default(false)
-  authorProfile Author?
-  refreshToken  RefreshToken?
+    id            String        @id @unique @default(uuid())
+    first_name    String        @db.VarChar(128)
+    last_name     String        @db.VarChar(128)
+    email         String        @unique @db.VarChar(128)
+    password      String        @db.VarChar(1024)
+    isVerified    Boolean       @default(false)
+    isAdmin       Boolean       @default(false)
+    isAuthor      Boolean       @default(false)
+    authorProfile Author?
+    refreshToken  RefreshToken?
+    comments      Comment[]
 }
 
 model Author {
-  id          String @id @unique @default(uuid())
-  authorName  String @db.VarChar(255)
-  bio         String @db.VarChar(1024)
-  user        User   @relation(fields: [userEmail], references: [email])
-  userEmail   String @unique
-  authorPosts Post[]
+    id          String @id @unique @default(uuid())
+    authorName  String @db.VarChar(255)
+    bio         String @db.VarChar(1024)
+    user        User   @relation(fields: [userEmail], references: [email], onUpdate: Cascade, onDelete: Cascade)
+    userEmail   String @unique
+    authorPosts Post[]
 }
 
 model Post {
-  id          String   @id @unique @default(uuid())
-  title       String   @db.VarChar(512)
-  image       String   @db.VarChar(128)
-  description String   @db.VarChar(2000)
-  category    String   @db.VarChar(128)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  author      Author   @relation(fields: [authorId], references: [id])
-  authorId    String
+    id          String    @id @unique @default(uuid())
+    title       String    @db.VarChar(512)
+    image       String    @db.VarChar(128)
+    description String    @db.VarChar(2000)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    author      Author    @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    authorId    String
+    comments    Comment[]
+    tags        Tag[]
 }
 
 model RefreshToken {
-  id        String   @id @unique @default(uuid())
-  token     String   @db.VarChar(512)
-  user      User     @relation(fields: [userEmail], references: [email])
-  userEmail String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+    id        String   @id @unique @default(uuid())
+    token     String   @db.VarChar(512)
+    user      User     @relation(fields: [userEmail], references: [email], onUpdate: Cascade, onDelete: Cascade)
+    userEmail String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Comment {
+    id          String   @id @unique @default(uuid())
+    userComment String   @db.VarChar(1000)
+    user        User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    userId      String
+    post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    postId      String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Tag {
+    id   String @id @default(uuid())
+    tag  String @unique @db.VarChar(128)
+    post Post[]
 }

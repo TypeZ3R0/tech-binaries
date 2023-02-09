@@ -31,10 +31,22 @@
     font-size: 1.3rem;
     line-height: 1.6;
     font-weight: 300;
+    margin-bottom: 7rem;
 }
 
 .extras {
-    height: 500px;
+    height: max-content;
     background-color: #f5f5f5;
+    padding: 1.5rem;
 }
 
+.tagsDiv {
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.tagItem {
+    margin-right: 1rem;
+    display: inline-block;
+    list-style: none;
+}

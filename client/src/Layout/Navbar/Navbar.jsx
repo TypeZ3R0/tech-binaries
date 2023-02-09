@@ -1,6 +1,6 @@
 // Third party imports
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 // Local imports
 import classes from "./Navbar.module.css";
@@ -10,65 +10,32 @@ import RegisterModal from "../../Components/AuthenticationModal/RegisterModal";
 import LoginModal from "../../Components/AuthenticationModal/LoginModal";
 import { axiosJWT } from "../../services/axios.js";
 import baseURL from "../../backend.js";
-import { getCookie, removeCookie } from "../../services/cookie.js";
+import { UserContext } from "../../Contexts/UserContext";
+import { PostsContext } from "../../Contexts/PostContext";
 
 // The Navbar component
 const Navbar = () => {
+    const navigate = useNavigate();
+
     const [showSearchModal, setShowSearchModal] = useState(false);
     const [showRegisterModal, setShowRegisterModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
-    const [foundUser, setFoundUser] = useState();
-    const [authorId, setAuthorId] = useState();
 
-    useEffect(() => {
-        const getAuthorId = async () => {
-            const accessToken = getCookie("accessToken");
-            try {
-                const { data } = await axiosJWT.get(`${baseURL}users/authors/nav-author`, {
-                    headers: { authorization: `Bearer ${accessToken}` },
-                });
-                setAuthorId(data.authorId);
-            } catch (err) {
-                console.log(err);
-                if (err) {
-                    setAuthorId();
-                }
-            }
-        };
-        getAuthorId();
-        const getNavProfile = async () => {
-            const accessToken = getCookie("accessToken");
-            try {
-                const { data } = await axiosJWT.get(`${baseURL}users/nav-profile`, {
-                    headers: { authorization: `Bearer ${accessToken}` },
-                });
-                setFoundUser(data.userId);
-            } catch (err) {
-                console.log(err);
-                if (err) {
-                    console.log("Please login");
-                }
-            }
-        };
-        getNavProfile();
-    }, [axiosJWT]);
+    const { user, dispatch } = useContext(UserContext);
+    const { dispatch: foundPostDispatch } = useContext(PostsContext);
 
     const handleLogout = async () => {
-        const accessToken = getCookie("accessToken");
-        const refreshToken = getCookie("refreshToken");
         try {
-            const { data } = await axiosJWT.post(
-                `${baseURL}users/logout`,
-                { token: refreshToken },
-                { headers: { authorization: `Bearer ${accessToken}` } }
-            );
-            if (data.successfullyLoggedOut) {
-                removeCookie("accessToken");
-                removeCookie("refreshToken");
-                setFoundUser();
-                window.location.reload();
+            const { data } = await axiosJWT.get(`${baseURL}users/logout`);
+            console.log(data);
+            if (data.logoutSuccess) {
+                dispatch({ type: "REMOVE_USER" });
+                dispatch({ type: "REMOVE_AUTHOR" });
+                dispatch({ type: "SET_RERENDER_STRING", payload: data.userId });
+                navigate("/", { replace: true });
             }
         } catch (err) {
+            dispatch({ type: "DELETE_USER" });
             console.log(err);
         }
     };
@@ -79,6 +46,7 @@ const Navbar = () => {
                 <SearchModal
                     closeClick={() => {
                         setShowSearchModal(false);
+                        foundPostDispatch({ type: "CLEAR_QUERIED_POSTS" });
                     }}
                 />
             )}
@@ -117,20 +85,8 @@ const Navbar = () => {
 
                 {/* Nav links */}
                 <ul className={classes.navlinks}>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/gadgets-and-apps"}>
-                        <li>Gadgets And Apps</li>
-                    </Link>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/gaming-and-entertainment"}>
-                        <li>Gaming And Entertainment</li>
-                    </Link>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/mobile-phones"}>
-                        <li>Mobile Phones</li>
-                    </Link>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/science-and-technology"}>
-                        <li>Science And Technology</li>
-                    </Link>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"category/pcs-and-laptops"}>
-                        <li>PCs And Laptops</li>
+                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"/categories"}>
+                        <li>Categories</li>
                     </Link>
                     <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"more"}>
                         <li>More</li>
@@ -138,13 +94,13 @@ const Navbar = () => {
                 </ul>
 
                 {/* Nav buttons */}
-                {authorId ? (
-                    <Link to={`users/authors/author-dashboard`} className={classes.dashboardButton}>
+                {user && user.isAuthor && (
+                    <Link to={"/users/authors/author-dashboard"} className={classes.dashboardBtn}>
                         DASHBOARD
                     </Link>
-                ) : null}
+                )}
                 <div className={classes.navbuttons}>
-                    {foundUser ? (
+                    {user ? (
                         <button onClick={handleLogout}>LOGOUT</button>
                     ) : (
                         <button
@@ -162,7 +118,7 @@ const Navbar = () => {
                     >
                         <img src={search_icon} className={classes.searchIcon} alt="Search" />
                     </button>
-                    {foundUser ? (
+                    {user ? (
                         <Link to={"users/profile"} className={classes.profileButton}>
                             PROFILE
                         </Link>

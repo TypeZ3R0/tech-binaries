@@ -1,10 +1,122 @@
-.name {
-    font-size: 5rem;
+.nameDiv {
+    display: flex;
+    align-items: center;
+}
+
+.changeNameBtn {
+    font-family: 'Readex Pro', sans-serif;
+    margin-left: 2rem;
+    padding: 0.7rem 0.8rem;
+    background-color: #61676c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.nameChangeForm {
+    display: flex;
+    align-items: center;
+}
+
+.nameChangeForm input {
+    height: 2.65rem;
+    margin-right: 1rem;
+    width: 35%;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 1.2rem;
+    padding: 0.7rem;
+    color: #424242;
     font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background-color: #eeeeee;
+}
+
+.nameChangeForm input:focus {
+    outline: none;
+    background-color: #e4e4e4;
+}
+
+.nameSaveBtn {
+    height: 2.65rem;
+    font-family: 'Readex Pro', sans-serif;
+    background-color: #126466;
+    color: #fff;
+    padding: 0rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.name {
+    font-size: 3rem;
+    font-weight: 600;
     color: #126466;
 }
 
 .email {
+    margin-top: 0.8rem;
     font-size: 1.8rem;
     color: #2c3531;
+}
+
+.authActionsBtn {
+    margin-top: 0.8rem;
+    margin-right: 1rem;
+    font-family: 'Readex Pro', sans-serif;
+    padding: 0.55rem 0.65rem;
+    background-color: #61676c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+
+.deleteUserBtn {
+    margin-right: 1rem;
+    font-family: 'Readex Pro', sans-serif;
+    padding: 0.55rem 0.65rem;
+    background-color: #e4e4e4;
+    color: #2c3135;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+
+}
+
+.passForm {
+    margin-bottom: 1rem;
+}
+
+.passForm input {
+    margin-right: 1rem;
+    width: 20%;
+    height: 2.55rem;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 1rem;
+    padding: 0rem 0.7rem;
+    color: #424242;
+    border: none;
+    border-radius: 5px;
+    background-color: #eeeeee;
+}
+
+.passForm input:focus {
+    outline: none;
+    background-color: #e4e4e4;
+}
+
+.passSubmitBtn {
+    height: 2.55rem;
+    font-family: 'Readex Pro', sans-serif;
+    background-color: #126466;
+    color: #fff;
+    padding: 0rem 0.8rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }

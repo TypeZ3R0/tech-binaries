@@ -1,0 +1,30 @@
+.commentDiv {
+    margin-bottom: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.commentUser {
+    margin-bottom: 0.3rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.commentString {
+    color: rgba(0, 0, 0, 0.521);
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+.deleteBtn {
+    font-family: 'Readex Pro', sans-serif;
+    background-color: rgb(61, 61, 61);
+    padding: 0.5rem 0.8rem;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+}

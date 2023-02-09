@@ -1,0 +1,70 @@
+.title {
+    font-size: 2rem;
+}
+
+.authorProfileForm {
+    margin-top: 2.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.authorProfileForm p {
+    font-size: 1.2rem;
+    color: #545454;
+    margin-bottom: 0.65rem;
+}
+
+.authorProfileForm input {
+    margin: 0.65rem 0rem;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    width: 40%;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.authorProfileForm input:focus {
+    outline: none;
+    background-color: #eeeeee;
+}
+
+.authorProfileForm textarea {
+    height: 12rem;
+    margin: 0.65rem 0rem;
+    font-family: 'Readex Pro', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    width: 40%;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    resize: none;
+}
+
+.authorProfileForm textarea:focus {
+    outline: none;
+    background-color: #eeeeee;
+}
+
+.createAuthorBtn {
+    font-family: 'Readex Pro', sans-serif;
+    margin: 0.65rem 0rem;
+    padding: 0.8rem 0.9rem;
+    font-size: 0.9rem;
+    background-color: #126466;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.createAuthorBtn:hover {
+    transition: ease-in-out 0.15s;
+    background-color: #1a7c7d;
+}

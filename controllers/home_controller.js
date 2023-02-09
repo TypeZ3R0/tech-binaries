@@ -1,31 +1,14 @@
-import { PrismaClient } from "@prisma/client";
+import db from "../database/db.js";
 
-const { post } = new PrismaClient();
-
-export const getHome = async (req, res) => {
+export const queryResults = async (req, res) => {
     try {
-        const feedPosts = await post.findMany({
-            select: {
-                id: true,
-                title: true,
-                image: true,
-                description: true,
-                category: true,
-                updatedAt: true,
-                author: {
-                    select: {
-                        authorName: true,
-                    },
-                },
-            },
-            orderBy: {
-                updatedAt: "desc"
-            }
+        const { q } = req.query;
+        const posts = await db.post.findMany({ include: { author: { select: { authorName: true } } } });
+        const foundPosts = posts.filter((post) => {
+            return post.title.toLowerCase().includes(q.toLowerCase());
         });
-    
-        res.status(200).send(feedPosts);
+        res.status(200).send(foundPosts);
     } catch (err) {
         console.log(err);
-        res.status(500).send("Internal Server Error")
     }
 };

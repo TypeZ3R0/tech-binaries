@@ -1,0 +1,45 @@
+.postEditPage {
+    width: 100%;
+    height: auto;
+}
+
+.postImage {
+    width: 50%;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+}
+
+.postTitleArea {
+    font-family: 'Readex Pro', sans-serif;
+    padding: 1.5rem;
+    font-size: 1.5rem;
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 6rem;
+    border: none;
+    resize: none;
+}
+
+.postTitleArea:focus {
+    outline: none;
+    background-color: #f3f3f3;
+}
+
+.saveChangesBtn {
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #126466;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    font-family: 'Readex Pro', sans-serif;
+    color: #fff;
+    cursor: pointer;
+}
+
+.saveChangesBtn:hover {
+    background-color: #1e7e80;
+    transition: ease-in-out 0.1s;
+}

@@ -1,0 +1,43 @@
+.addComment {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    height: 12rem;
+}
+
+.commentInput {
+    width: 100%;
+    height: inherit;
+    outline: none;
+    border: none;
+    font-family: 'Readex Pro', sans-serif;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #f5f5f5;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    resize: none;
+}
+
+.commentInput::placeholder {
+    font-size: 1rem;
+    color: #0000006b;
+}
+
+.commentPostBtn {
+    font-family: 'Readex Pro', sans-serif;
+    padding: 0.8rem 2rem;
+    background-color: #126466;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.commentPostBtn:hover {
+    background-color: #1f7e80;
+    transition: ease-in-out 0.15s;
+}
