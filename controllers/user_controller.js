@@ -148,8 +148,8 @@ export const userLogout = async (req, res) => {
     try {
         await db.refreshToken.deleteMany({ where: { userEmail: user.email } });
         res.status(200)
-            .cookie("refreshToken", "", { expires: new Date("Thu, Jan 01 1970 00:00:00 UTC") })
-            .cookie("accessToken", "", { expires: new Date("Thu, Jan 01 1970 00:00:00 UTC") })
+            .cookie("refreshToken", "", { expires: new Date("Thu, Jan 01 1970 00:00:00 UTC"), sameSite: "strict" })
+            .cookie("accessToken", "", { expires: new Date("Thu, Jan 01 1970 00:00:00 UTC"), sameSite: "strict" })
             .send({ logoutSuccess: true, userId: user.id });
     } catch (err) {
         console.log(err);

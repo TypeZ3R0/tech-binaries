@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 // Local imports
 import classes from "./Navbar.module.css";
 import search_icon from "../../images/search_icon.svg";
+import ham_menu_mobile from "../../images/ham_menu_mobile.svg";
 import SearchModal from "../../Components/SearchModal/SearchModal";
 import RegisterModal from "../../Components/AuthenticationModal/RegisterModal";
 import LoginModal from "../../Components/AuthenticationModal/LoginModal";
@@ -75,17 +76,18 @@ const Navbar = () => {
             <div className={classes.navItems}>
                 {/* Main title */}
                 <Link to={"/"} style={{ textDecoration: "none" }}>
-                    <h1 className={classes.title}>
+                    <h1 className={classes.titleTabletAndPc}>
                         TECH
                         <br />
                         BINARIES
                         <div style={{ width: "60%", height: "1px", backgroundColor: "#2c3531", marginTop: "0.5rem" }} />
                     </h1>
+                    <h1 className={classes.titleMobile}>TECH BINARIES</h1>
                 </Link>
 
                 {/* Nav links */}
                 <ul className={classes.navlinks}>
-                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"/categories"}>
+                    <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"/category"}>
                         <li>Categories</li>
                     </Link>
                     <Link style={{ textDecoration: "none", color: "#2c3531" }} to={"more"}>
@@ -132,6 +134,9 @@ const Navbar = () => {
                         </button>
                     )}
                 </div>
+                <button className={classes.hamMenuMobile}>
+                    <img src={ham_menu_mobile} alt="ham_menu_mobile" />
+                </button>
             </div>
         </nav>
     );

@@ -77,7 +77,7 @@ const PostEdit = () => {
         <div className={classes.postEditPage}>
             {error.length === 0 ? (
                 <div>
-                    <img src={image} alt="post image" className={classes.postImage} />
+                    <img src={image} alt="post_pic" className={classes.postImage} />
                     <form onSubmit={handlePostEdit}>
                         <input type={"file"} onChange={handleImageInput} />
                         <br />

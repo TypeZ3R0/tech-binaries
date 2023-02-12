@@ -1,4 +1,4 @@
-.mainDiv {
+.authorStatisticsDiv {
     grid-column: 1/2;
 }
 
@@ -36,4 +36,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media screen and (max-width: 1024px) {
+    .authorName {
+        font-size: 1.5rem;
+    }
+
+    .authorBio {
+        font-size: 1.1rem;
+    }
+
+    .postCount {
+        font-size: 1.2rem;
+    }
+
+    .createPostLink {
+        font-size: 1.4rem;
+        padding: 1.2rem;
+    }
 }

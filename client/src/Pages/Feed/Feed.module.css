@@ -10,18 +10,6 @@
     background-color: aliceblue;
 }
 
-.weekly {
-    grid-column: 1/3;
-    background-color: aliceblue;
-    height: 450px;
-}
-
-.weekly h1 {
-    color: #2c3531;
-    font-size: 1.8rem;
-    margin-bottom: 2.5rem;
-}
-
 .recent {
     grid-column: 1/2;
     height: auto;
@@ -50,4 +38,40 @@
     border-radius: 5px;
     margin: auto;
 
+}
+
+@media screen and (max-width: 1024px) {
+    .popular {
+        width: 100%;
+        height: 450px;
+    }
+    .recent h1 {
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .allPostsLink {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .feed {
+        grid-template-columns: 1fr;
+        row-gap: 1.5rem;
+    }
+
+    .popular {
+        aspect-ratio: 5/3;
+        height: 200px;
+    }
+
+    .recent {
+        padding: 1.2rem 0rem;
+    }
+
+    .recent h1 {
+        font-size: 1.1rem;
+    }
 }

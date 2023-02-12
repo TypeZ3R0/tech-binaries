@@ -21,7 +21,7 @@ const Categories = () => {
     console.log(categories);
     return (
         <div>
-            <h1 style={{ fontSize: "2rem", color: "#2c3135" }}>CATEGORIES</h1>
+            <h1 style={{ fontSize: "1.5rem", color: "#2c3135" }}>CATEGORIES</h1>
             <div style={{ marginTop: "2.5rem" }}>
                 {categories.map((category) => {
                     return (
@@ -29,7 +29,7 @@ const Categories = () => {
                             <Link
                                 to={`/category/${category.tag.slice(1)}`}
                                 key={category.id}
-                                style={{ fontSize: "1.3rem", textDecoration: "none", color: "#126466" }}
+                                style={{ fontSize: "1rem", textDecoration: "none", color: "#126466" }}
                             >
                                 {category.tag
                                     .slice(1)

@@ -5,7 +5,7 @@ import classes from "./AuthorStatistics.module.css";
 
 const AuthorStatistics = (props) => {
     return (
-        <div className={classes.mainDiv}>
+        <div className={classes.authorStatisticsDiv}>
             <h1 className={classes.authorName}>{props.authorName}</h1>
             <p className={classes.authorBio}>{props.authorBio}</p>
             <p className={classes.postCount}>TOTAL POSTS: {props.postCount}</p>

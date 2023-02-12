@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import classes from "./ResetPassword.module.css";
 import baseURL from "../../backend.js";
 import axios from "axios";
-import { axiosJWT } from "../../services/axios";
 import { UserContext } from "../../Contexts/UserContext";
 
 const UpdateEmail = () => {

@@ -12,9 +12,6 @@ const Feed = () => {
     return (
         <div className={classes.feed}>
             <div className={classes.popular}></div>
-            <div className={classes.weekly}>
-                <h1>THIS WEEK IN TIME</h1>
-            </div>
             <div className={classes.recent}>
                 <h1>RECENT POSTS</h1>
                 {posts ? (

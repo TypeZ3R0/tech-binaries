@@ -55,7 +55,7 @@ function App() {
                         <Route path="users/authors/author-dashboard" element={<NotFoundPage />} />
                     )}
                     <Route path="users/authors/create-post" element={<NewPost />} />
-                    <Route path="categories/" element={<Categories />} />
+                    <Route path="category/" element={<Categories />} />
                     <Route path="category/:tag" element={<SingleCategory />} />
                 </Routes>
             </Main>

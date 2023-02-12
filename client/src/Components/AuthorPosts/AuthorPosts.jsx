@@ -23,7 +23,7 @@ const AuthorPosts = (props) => {
     };
 
     return (
-        <div>
+        <div className={classes.authorPostsDiv}>
             <h3 className={classes.info}>MY POSTS:</h3>
             {props.authorPosts.length !== 0 ? (
                 <div>

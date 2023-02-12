@@ -197,6 +197,7 @@ const NewPostForm = (props) => {
                                             <label htmlFor={tag.id}>{tag.tag}</label>
                                             <img
                                                 src={close_icon_black}
+                                                alt="close_icon"
                                                 height={"20px"}
                                                 className={classes.tagDeleteBtn}
                                                 onClick={(e) => {

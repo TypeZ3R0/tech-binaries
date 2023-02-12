@@ -9,8 +9,6 @@ import { UserContext } from "../../Contexts/UserContext";
 import AuthorCreate from "./AuthorCreate";
 
 const AuthorProfile = () => {
-    const [authorName, setAuthorName] = useState("");
-    const [authorBio, setAuthorBio] = useState("");
     const [authorPosts, setAuthorPosts] = useState([]);
     const [deletedPostId, setDeletedPostId] = useState("");
 
@@ -31,8 +29,6 @@ const AuthorProfile = () => {
         };
         getAuthorPosts();
     }, [axiosJWT, deletedPostId]);
-
-    console.log({ authorName, authorBio });
 
     return (
         <div>

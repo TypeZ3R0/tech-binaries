@@ -27,7 +27,6 @@ app.use("/users", userRouter); // User route
 
 // Listen to dev or production server
 const PORT = process.env.PORT || 8000;
-const HOSTNAME = "localhost";
 app.listen(PORT, () => {
-    console.log(`Server started at http://${HOSTNAME}:${PORT}`);
+    console.log(`Server started on ${PORT}`);
 });

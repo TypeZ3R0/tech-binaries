@@ -9,3 +9,12 @@
         padding: 1.5rem 1.5rem;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .main {
+        grid-column: 1/2;
+        grid-row: 2/3;
+        margin-top: 50px;
+        padding: 1.2rem 1.2rem;
+    }
+}

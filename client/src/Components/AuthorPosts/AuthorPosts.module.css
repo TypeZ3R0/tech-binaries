@@ -44,3 +44,22 @@
     cursor: pointer;
     font-weight: 500;
 }
+
+@media screen and (max-width: 1024px) {
+    .authorPostsDiv {
+        margin-top: 2.5rem;
+    }
+
+    .info {
+        font-size: 1.2rem;
+        padding: 0.7rem;
+    }
+
+    .postEditBtn {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .postDeleteBtn {
+        padding: 0.5rem 0.8rem;
+    }
+}

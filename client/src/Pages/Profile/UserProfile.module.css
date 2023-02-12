@@ -85,7 +85,6 @@
     border-radius: 5px;
     font-size: 0.95rem;
     cursor: pointer;
-
 }
 
 .passForm {
@@ -119,4 +118,18 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+@media screen and (max-width: 1024px) {
+    .name {
+        font-size: 2rem;
+    }
+
+    .email {
+        font-size: 1.2rem;
+    }
+
+    .passForm input {
+        width: 50%;
+    }
 }

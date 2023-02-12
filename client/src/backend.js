@@ -1,5 +1,21 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const baseURL = process.env.REACT_APP_BASE_URL;
+const currentEnv = process.env.NODE_ENV;
+
+console.log(currentEnv);
+
+let baseURL;
+
+switch (currentEnv) {
+    case "development":
+        baseURL = "http://localhost:8000/";
+        break;
+    case "production":
+        baseURL = "";
+        break;
+    default:
+        break;
+}
+
 export default baseURL;

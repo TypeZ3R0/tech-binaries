@@ -41,3 +41,18 @@
     background-color: #1f7e80;
     transition: ease-in-out 0.15s;
 }
+
+@media screen and (max-width: 1024px) {
+    .commentInput {
+        font-size: 0.9rem;
+    }
+
+    .commentInput::placeholder {
+        font-size: 0.9rem;
+    }
+
+    .commentPostBtn {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}

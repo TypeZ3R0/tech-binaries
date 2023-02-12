@@ -46,3 +46,48 @@
     color: #555555;
     font-weight: 400;
 }
+
+@media screen and (max-width: 1024px) {
+    .recentPostItem {
+        margin-bottom: 1.5rem;
+    }
+
+    .img {
+        height: 95px;
+    }
+
+    .postInfo h4 {
+        font-size: 0.6rem;
+    }
+
+    .postTitle {
+        font-size: 1rem;
+    }
+
+    .extraInfo h4 {
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .recentPostItem {
+        margin-bottom: 1rem;
+    }
+
+    .img {
+        height: 60px;
+    }
+
+    .postInfo h4 {
+        font-size: 0.4rem;
+    }
+
+    .postTitle {
+        font-size: 0.7rem;
+    }
+
+    .extraInfo h4 {
+        font-size: 0.5rem;
+    }
+
+}
