@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 
 // Routes
-app.use("/", homeRouter); // Home route
-app.use("/posts", postsRouter); // Posts route
-app.use("/category", categoryRouter); // Category route
-app.use("/users", userRouter); // User route
+app.use("/api", homeRouter); // Home route
+app.use("/api/posts", postsRouter); // Posts route
+app.use("/api/category", categoryRouter); // Category route
+app.use("/api/users", userRouter); // User route
 
 // Listen to dev or production server
 const PORT = process.env.PORT || 8000;
