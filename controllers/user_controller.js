@@ -71,13 +71,17 @@ export const userVerifyEmail = async (req, res) => {
 // Resend email verification link through email if the previous one expires
 export const userResendEmailVerification = async (req, res) => {
     const { email: enteredEmail } = req.body;
-    const existingUser = await db.user.findUnique({ where: { email: enteredEmail } });
-    if (!existingUser)
-        return res.status(404).send({ message: "No user exists with this email address.", success: false });
-    const emailToken = convertEmailString(enteredEmail);
-    // Resend verification email
-    sendVerificationEmail(enteredEmail, emailToken);
-    res.status(200).send({ message: `Verification link sent to ${enteredEmail}.`, success: true });
+    try {
+        const existingUser = await db.user.findUnique({ where: { email: enteredEmail } });
+        if (!existingUser)
+            return res.status(404).send({ message: "No user exists with this email address.", success: false });
+        const emailToken = convertEmailString(enteredEmail);
+        // Resend verification email
+        sendVerificationEmail(enteredEmail, emailToken);
+        res.status(200).send({ message: `Verification link sent to ${enteredEmail}.`, success: true });
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 // Login existing user provided the user is verified

@@ -36,7 +36,7 @@ export const PostsProvider = (props) => {
     useEffect(() => {
         const getPostsOnQuery = async () => {
             try {
-                const { data } = await axios.get(`${baseURL}search?q=${state.query}`);
+                const { data } = await axios.get(`${baseURL}home/search?q=${state.query}`);
                 dispatch({ type: "SET_QUERIED_POSTS", payload: data });
             } catch (err) {
                 console.log(err);

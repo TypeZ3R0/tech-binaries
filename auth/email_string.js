@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 export const convertEmailString = (userEmail) => {
     const emailSecret = process.env.EMAIL_VERIFICATION_SECRET;
     const preSignedEmail = { email: userEmail };
-    const emailToken = jwt.sign(preSignedEmail, emailSecret, { expiresIn: "1min" });
+    const emailToken = jwt.sign(preSignedEmail, emailSecret, { expiresIn: "30min" });
     return emailToken;
 };
 

@@ -1,9 +1,14 @@
 // Requiring project dependencies
 dotenv.config();
+import path from "path";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+
+// Current directory
+import * as url from "url";
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 // Importing routers from routes
 import homeRouter from "./routes/home_router.js";
@@ -14,13 +19,13 @@ import userRouter from "./routes/user_router.js";
 const app = express();
 
 // Middleware
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "" || "http://localhost:3000" }));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 
 // Routes
-app.use("/api", homeRouter); // Home route
+app.use("/api/home", homeRouter); // Home route
 app.use("/api/posts", postsRouter); // Posts route
 app.use("/api/category", categoryRouter); // Category route
 app.use("/api/users", userRouter); // User route

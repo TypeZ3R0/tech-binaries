@@ -12,7 +12,7 @@ switch (currentEnv) {
         baseURL = "http://localhost:8000/api/";
         break;
     case "production":
-        baseURL = "";
+        baseURL = "api/";
         break;
     default:
         break;

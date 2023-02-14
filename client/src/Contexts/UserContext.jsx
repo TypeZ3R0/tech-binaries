@@ -18,6 +18,7 @@ export const UserProvider = (props) => {
         const getUser = async () => {
             try {
                 const { data } = await axiosJWT.get(`${baseURL}users/get-user`);
+                console.log(data)
                 if (data) {
                     dispatch({ type: "SET_USER", payload: data.user });
                     if (data.user.authorProfile && data.user.isAuthor)
