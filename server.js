@@ -1,14 +1,15 @@
 // Requiring project dependencies
 dotenv.config();
-import path from "path";
+import path, { dirname } from "path";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
 // Current directory
-import * as url from "url";
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Importing routers from routes
 import homeRouter from "./routes/home_router.js";
@@ -18,8 +19,12 @@ import userRouter from "./routes/user_router.js";
 
 const app = express();
 
+const clientBuildPath = path.join(__dirname, "client/build");
+app.use(express.static(clientBuildPath))
+
 // Middleware
 app.use(cors({ credentials: true, origin: "" || "http://localhost:3000" }));
+app.use(express.static(path.join(__dirname, "./client/build")));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));

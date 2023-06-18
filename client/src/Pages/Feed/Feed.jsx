@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 
 import classes from "./Feed.module.css";
 import SinglePost from "../../Components/SinglePost/SinglePost";
-// import posts from "../../blog_posts.js";
 import { Link } from "react-router-dom";
 import { PostsContext } from "../../Contexts/PostContext.jsx";
 

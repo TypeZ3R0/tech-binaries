@@ -8,11 +8,13 @@ import { PostsProvider } from "./Contexts/PostContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <BrowserRouter>
-        <PostsProvider>
-            <UserProvider>
-                <App />
-            </UserProvider>
-        </PostsProvider>
-    </BrowserRouter>
+    <React.StrictMode>
+        <BrowserRouter>
+            <PostsProvider>
+                <UserProvider>
+                    <App />
+                </UserProvider>
+            </PostsProvider>
+        </BrowserRouter>
+    </React.StrictMode>
 );
