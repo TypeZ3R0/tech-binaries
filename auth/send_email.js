@@ -1,14 +1,19 @@
+// Import dependencies
+import dotenv from "dotenv";
+dotenv.config({ path: "../.env" });
+
+// Local imports
 import { createTransport } from "nodemailer";
 
 export const sendVerificationEmail = (userEmail, emailToken) => {
     const Transporter = createTransport({
         service: "Gmail",
-        host: "smtp.gmail.com",
-        port: 465,
+        host: process.env.EMAIL_SMTP_HOST,
+        port: process.env.EMAIL_SMTP_PORT,
         secure: true,
         auth: {
-            user: "sampletestemail666@gmail.com",
-            pass: "smdegowonsisfxfr",
+            user: process.env.EMAIL_SMTP_AUTH_USER,
+            pass: process.env.EMAIL_SMTP_AUTH_PASS,
         },
     });
     let mailOptions = {
@@ -26,12 +31,12 @@ export const sendVerificationEmail = (userEmail, emailToken) => {
 export const sendEmailUpdateEmail = (userEmail, emailToken) => {
     const Transporter = createTransport({
         service: "Gmail",
-        host: "smtp.gmail.com",
-        port: 465,
+        host: process.env.EMAIL_SMTP_HOST,
+        port: process.env.EMAIL_SMTP_PORT,
         secure: true,
         auth: {
-            user: "sampletestemail666@gmail.com",
-            pass: "smdegowonsisfxfr",
+            user: process.env.EMAIL_SMTP_AUTH_USER,
+            pass: process.env.EMAIL_SMTP_AUTH_PASS,
         },
     });
     let mailOptions = {
@@ -49,12 +54,12 @@ export const sendEmailUpdateEmail = (userEmail, emailToken) => {
 export const sendResetPassEmail = (userEmail, resetPassToken) => {
     const Transporter = createTransport({
         service: "Gmail",
-        host: "smtp.gmail.com",
-        port: 465,
+        host: process.env.EMAIL_SMTP_HOST,
+        port: process.env.EMAIL_SMTP_PORT,
         secure: true,
         auth: {
-            user: "sampletestemail666@gmail.com",
-            pass: "smdegowonsisfxfr",
+            user: process.env.EMAIL_SMTP_AUTH_USER,
+            pass: process.env.EMAIL_SMTP_AUTH_PASS,
         },
     });
     let mailOptions = {
